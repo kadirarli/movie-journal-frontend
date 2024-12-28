@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+import MovieSearch from './pages/MovieSearch';
+import Favorites from './pages/Favorites';
+
+function PrivateRoute({ children }) {
+    const { isAuthenticated, checkAndUpdateAuthStatus } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!checkAndUpdateAuthStatus()) {
+            navigate('/');
+        }
+    }, []);
+
+    return isAuthenticated ? children : null;
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <AuthProvider>
+            <Router>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route
+                        path="/profile"
+                        element={
+                            <PrivateRoute>
+                                <Profile />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/movie/search"
+                        element={
+                            <PrivateRoute>
+                                <MovieSearch />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/favorites"
+                        element={
+                            <PrivateRoute>
+                                <Favorites />
+                            </PrivateRoute>
+                        }
+                    />
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
 }
 
 export default App;

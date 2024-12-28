@@ -1,0 +1,55 @@
+.favorites-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.favorite-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 15px;
+}
+
+.favorite-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.favorite-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+}
+
+.favorite-card p {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+}
+
+.favorite-card button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.favorite-card button:hover {
+    background-color: #ff3333;
+}

@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# OS-specific files
+.DS_Store    # macOS
+Thumbs.db    # Windows
+
+# npm package lock files
+package-lock.json
